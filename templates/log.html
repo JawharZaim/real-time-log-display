@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log File: {{ filename }}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/themes/prism.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            white-space: pre-wrap; /* Wrap long lines */
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        a.button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        a.button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Log File: {{ filename }}</h1>
+        <div class="buttons">
+            <a href="/" class="button">Choose Another Project</a>
+            <a href="javascript:location.reload()" class="button">Reload</a>
+        </div>
+    </div>
+    <div class="container">
+        <pre id="log-content"></pre>
+    </div>
+    <script>
+        const filename = "{{ filename }}";
+        const ws = new WebSocket(`ws://${window.location.host}/ws/log/${filename}`);
+
+        ws.onmessage = function(event) {
+            const pre = document.getElementById('log-content');
+            pre.textContent += event.data;
+            pre.scrollTop = pre.scrollHeight; // Scroll to bottom
+        };
+
+        ws.onclose = function() {
+            console.log("WebSocket closed");
+        };
+
+        ws.onerror = function(error) {
+            console.error("WebSocket error:", error);
+        };
+    </script>
+</body>
+</html>

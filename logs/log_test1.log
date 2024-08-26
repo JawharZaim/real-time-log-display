@@ -1,0 +1,19 @@
+File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+  File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
+    raise e
+  File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/starlette/routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/starlette/routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "/opt/odoo/odoo-venv/lib/python3.10/site-packages/starlette/templating.py", line 44, in __call__
+    extensions = request.get("extensions", {})
+AttributeError: 'str' object has no attribute 'get'
+tets
+test
